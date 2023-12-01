@@ -1,5 +1,65 @@
 {% extends 'base.html' %}
 {% block title %}Nail Salon{% endblock %}
 {% block content %}
-    <h1></h1>
+<section class="welcome">
+    <img src="{{ url_for('static', filename='images/Beautiful female hand with winter manicure.jpg') }}"
+        alt="Nail salon" fetchpriority="high" width="100%">
+    <div class="welcome-block">
+        <div class="container my-3">
+            <center><h2>🌟 Where beauty begins!</h2></center>
+            <p>We offer you the perfect combination of luxurious nail care and the unrivaled atmosphere of our salon.
+                Immerse yourself in the world of elegance and comfort, where every detail is created for your beauty and
+                pleasure.</p>
+                <center>
+                    <div class="mt-5">
+                        <a href="/signup" class="btn btn-primary">I want to work as a Manicure Master!</a>
+                        <a href="#about" class="btn btn-success">Tell me more!</a>
+                    </div>
+                </center>
+        </div>
+    </div>
+</section>
+<section class="my-4" id="about">
+    <div class="container" id="icon-grid">
+        <h2 class="pb-2 border-bottom">🌈 Our services:</h2>
+        <p>
+            Manicure and pedicure according to the latest trends
+            Nail design and painting for all tastes
+            Spa treatments for your hands and feet
+            Exclusive packages for our regular customers
+        </p>
+        <div class="row row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-2 g-4 py-5">
+            <div class="col d-flex align-items-start">
+                <div>
+
+                    <h3 class="fw-bold mb-0 fs-4 text-body-emphasis">💻 Online reservation and record management
+                    </h3>
+                    <p>No need to wait in line! Register for our services online conveniently and quickly, and track
+                        and change your records in a few clicks.</p>
+                </div>
+            </div>
+            <div class="col d-flex align-items-start">
+                <div>
+                    <h3 class="fw-bold mb-0 fs-4 text-body-emphasis">🎁 Promotions and discounts:</h3>
+                    <p>Be in the center of events! Follow our promotions and receive special offers for our
+                        customers.</p>
+                </div>
+            </div>
+            <div class="col d-flex align-items-start">
+                <div>
+                    <h3 class="fw-bold mb-0 fs-4 text-body-emphasis">📞 Contact us</h3>
+                    <p>Do you have questions or need advice? Our team is ready to help you. Contact us by phone or
+                        email.</p>
+                </div>
+            </div>
+            <div class="col d-flex align-items-start">
+                <div>
+                    <h3 class="fw-bold mb-0 fs-4 text-body-emphasis">📍 Salon address</h3>
+                    <p>Find us at "Your address". We are waiting for you!
+                        See you in "Name of your salon" - your oasis of beauty and luxury! ✨</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 {% endblock %}
