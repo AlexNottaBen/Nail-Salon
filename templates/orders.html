@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block title %}Nail Salon | Credits{% endblock %}
+{% block content %}
+<main>
+    <div class="container mt-2">
+        <h1>Orders</h1>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">№</th>
+                    <th scope="col">Service Name</th>
+                    <th scope="col">Customer Name</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row">1</th>
+                    <td>Mark</td>
+                    <td>Johny Doe</td>
+                    <td>Scheduled</td>
+                    <td><a href="/master/orders/1" class="btn btn-primary">Show more</a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</main>
+<footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+    {% endblock %}

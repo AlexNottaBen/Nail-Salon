@@ -27,6 +27,16 @@ def show_login_page() -> str:
     return render_template("login.html")
 
 
+@app.route("/master/orders")
+def show_orders_page() -> str:
+    return render_template("orders.html")
+
+
+@app.route("/master/orders/<int:id>")
+def show_order_card_page(id: int) -> str:
+    return render_template("ordercard.html")
+
+
 def main() -> None:
     app.run(debug=True, port=5000)
 
