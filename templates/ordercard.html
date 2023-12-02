@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block title %}Nail Salon | Credits{% endblock %}
+{% block content %}
+<main>
+    <div class="container mt-2">
+        <h1>Order card</h1>
+        <form method="POST">
+            <ul class="order-card">
+                <li>№: 1</li>
+                <li>Service Name: Mark</li>
+                <li>Customer Name: Johny Doe</li>
+                <li>Status:
+                    <select name="status" id="status">
+                        <option value="scheduled">Scheduled</option>
+                        <option value="working" selected>Working</option>
+                        <option value="completed">Completed</option>
+                        <option value="rejected">Rejected</option>
+                    </select>
+                </li>
+                <li>Start:
+                    <input type="date" name="start-date">
+                    <input type="time" name="start-time">
+                </li>
+                <li>Finish:
+                    <input type="date" name="finish-date">
+                    <input type="time" name="finish-time">
+                </li>
+            </ul>
+            <button type="submit" class="btn btn-primary">Update</button>
+            <button type="reset" class="btn btn-danger">Reset</button>
+        </form>
+
+</main>
+<footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+    {% endblock %}
