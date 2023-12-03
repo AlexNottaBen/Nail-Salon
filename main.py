@@ -20,12 +20,14 @@ def show_credits_page() -> str:
 
 @app.route("/signup")
 def show_signup_page() -> str:
-    return render_template("signup.html")
+    form: RegisterForm = RegisterForm()
+    return render_template("signup.html", form=form)
 
 
 @app.route("/login")
 def show_login_page() -> str:
-    return render_template("login.html")
+    form: LoginForm = LoginForm()
+    return render_template("login.html", form=form)
 
 
 @app.route("/master/orders")
