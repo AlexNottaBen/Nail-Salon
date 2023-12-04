@@ -7,6 +7,7 @@ from app import app
 from forms.LoginForm import LoginForm
 from forms.RegisterForm import RegisterForm
 
+from models.User import User
 
 @app.route("/")
 def index() -> str:
