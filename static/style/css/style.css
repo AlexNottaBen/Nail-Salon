@@ -36,6 +36,29 @@ p, a {
   text-transform: inherit;
 }
 
+.nav-user {
+  color: black;
+  font-size: 18px;
+  font-family: Circular, sans-serif;
+  font-weight: 600;
+  line-height: 25px;
+  white-space: nowrap;
+  text-transform: inherit;
+  margin-top: 8px;
+}
+
+.nav-superuser {
+  color: black;
+  font-size: 18px;
+  font-family: Circular, sans-serif;
+  font-weight: 600;
+  line-height: 25px;
+  white-space: nowrap;
+  text-transform: inherit;
+  margin-top: 8px;
+  color: #e69500;
+}
+
 section.welcome {
   position: relative;
 }
