@@ -7,7 +7,7 @@ from app import app, database
 from forms.LoginForm import LoginForm
 from forms.RegisterForm import RegisterForm
 from managers.UserManager import UserManager
-
+from flask_login import login_required, logout_user
 
 @app.route("/")
 def index() -> str:
@@ -43,13 +43,22 @@ def show_login_page() -> str:
 
 
 @app.route("/master/orders")
+@login_required
 def show_orders_page() -> str:
     return render_template("orders.html")
 
 
 @app.route("/master/orders/<int:id>", methods=["GET", "POST"])
+@login_required
 def show_order_card_page(id: int) -> str:
     return render_template("ordercard.html")
+
+
+@app.route('/logout')
+def logout_page():
+    logout_user()
+    flash('You have been logged out!', category='info')
+    return redirect("/")
 
 
 def main() -> None:

@@ -1,5 +1,15 @@
 @charset "UTF-8"
 
+@mixin nav-user
+    color: black
+    font-size: 18px
+    font-family: Circular,sans-serif
+    font-weight: 600
+    line-height: 25px
+    white-space: nowrap
+    text-transform: inherit
+    margin-top: 8px
+
 body
     font-size: 20px
 
@@ -33,6 +43,13 @@ p, a
     line-height: 25px
     white-space: nowrap
     text-transform: inherit
+
+.nav-user
+    @include nav-user
+
+.nav-superuser
+    @include nav-user
+    color: darken(orange, 5%)
 
 section.welcome
     position: relative

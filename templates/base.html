@@ -25,12 +25,23 @@
                 <img src="{{ url_for('static', filename='images/Logotype.png') }}" alt="Logotype">
                 <b class="fs-3 mx-2">Nail Salon</b>
             </a>
-
             <ul class="nav nav-pills my-auto">
+                {% if current_user.is_authenticated %}
+                    {% if current_user.is_administrator %}
+                        <li class="nav-superuser">Welcome, Administrator {{ current_user.full_name }}!</li>
+                    {% else %}
+                        <li class="nav-user">Welcome, Master {{ current_user.full_name }}!</li>
+                    {% endif %}
+                {% endif %}
                 <li class="nav-item"><a href="/" class="nav-link">Home</a></li>
                 <li class="nav-item"><a href="/credits" class="nav-link">Credits</a></li>
-                <li class="nav-item"><a href="/signup" class="nav-link">Sign up</a></li>
-                <li class="nav-item"><a href="/login" class="nav-link">Log in</a></li>
+                {% if current_user.is_authenticated %}
+                    <li class="nav-item"><a href="/master/orders" class="nav-link">Orders</a></li>
+                    <li class="nav-item"><a href="/logout" class="nav-link">Log out</a></li>
+                {% else %}
+                    <li class="nav-item"><a href="/signup" class="nav-link">Sign up</a></li>
+                    <li class="nav-item"><a href="/login" class="nav-link">Log in</a></li>
+                {% endif %}
             </ul>
         </nav>
     </header>
