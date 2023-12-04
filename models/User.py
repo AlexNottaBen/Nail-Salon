@@ -6,6 +6,7 @@ from flask_login import UserMixin
 
 
 class User(database.Model, UserMixin):
+    __tablename__ = "users"
     id = database.Column(database.Integer(), primary_key=True)
     email_address = database.Column(database.String(length=319), nullable=False, unique=True)
     password_hash = database.Column(database.String(length=256), nullable=False)
@@ -29,4 +30,4 @@ class User(database.Model, UserMixin):
 
 
     def __str__(self) -> str:
-        return self.username
+        return self.full_name
