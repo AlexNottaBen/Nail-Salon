@@ -16,7 +16,7 @@ app = Flask(
     template_folder="templates",
     static_folder="static"
 )
-app.config['SECRET_KEY'] = getenv('SECRET_KET')
+app.config['SECRET_KEY'] = getenv('SECRET_KEY')
 app.config['SQLALCHEMY_DATABASE_URI'] = getenv('DB_URI')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 database = SQLAlchemy(app)
