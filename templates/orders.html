@@ -15,13 +15,15 @@
                 </tr>
             </thead>
             <tbody>
+                {% for order in orders %}
                 <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Johny Doe</td>
-                    <td>Scheduled</td>
+                    <th scope="row">{{ order.id }}</th>
+                    <td>{{ order.service_name }}</td>
+                    <td>{{ order.customer_full_name }}</td>
+                    <td>{{ order.status.status_name }}</td>
                     <td><a href="/master/orders/1" class="btn btn-primary">Show more</a></td>
                 </tr>
+                {% endfor %}
             </tbody>
         </table>
     </div>

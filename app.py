@@ -28,6 +28,6 @@ login_manager.login_message = "Please log in to access this page!" # flash messa
 login_manager.login_message_category = "info" # category of flash message
 
 @login_manager.user_loader
-def load_user(user_id):
+def load_user(id):
     from models.User import User
-    return User.query.get(int(user_id))
+    return User.query.get(int(id))
