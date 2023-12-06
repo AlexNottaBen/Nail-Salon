@@ -6,30 +6,29 @@
         <h1>Order card</h1>
         <form method="POST">
             <ul class="order-card">
-                <li>№: 1</li>
-                <li>Service Name: Mark</li>
-                <li>Customer Name: Johny Doe</li>
+                <li>№: {{ order.id }}</li>
+                <li>Service Name: <input type="text" name="service-name" id="service-name" value="{{ order.service_name }}" style="width: 400px"></li>
+                <li>Customer Name: <input type="text" name="customer-full-name" id="customer-full-name" value="{{ order.customer_full_name }}" style="width: 400px"></li>
                 <li>Status:
-                    <select name="status" id="status">
-                        <option value="scheduled">Scheduled</option>
-                        <option value="working" selected>Working</option>
-                        <option value="completed">Completed</option>
-                        <option value="rejected">Rejected</option>
+                    <select name="status-id" id="status-id">
+                        <option value="1" {% if order.status_id == 1 %}selected{% endif %}>Scheduled</option>
+                        <option value="2" {% if order.status_id == 2 %}selected{% endif %}>Working</option>
+                        <option value="3" {% if order.status_id == 3 %}selected{% endif %}>Completed</option>
+                        <option value="4" {% if order.status_id == 4 %}selected{% endif %}>Rejected</option>
                     </select>
                 </li>
                 <li>Start:
-                    <input type="date" name="start-date">
-                    <input type="time" name="start-time">
+                    <input type="datetime" name="start-datetime" value="{{ order.start_datetime }}">
                 </li>
                 <li>Finish:
-                    <input type="date" name="finish-date">
-                    <input type="time" name="finish-time">
+                    <input type="datetime" name="finish-datetime" value="{{ order.finish_datetime }}">
                 </li>
             </ul>
-            <button type="submit" class="btn btn-primary">Update</button>
+            <a href="/master/orders" class="btn btn-primary">Go back</a>
+            <button type="submit" class="btn btn-warning">Update</button>
             <button type="reset" class="btn btn-danger">Reset</button>
         </form>
-
+    </div>
 </main>
 <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
     {% endblock %}

@@ -30,7 +30,7 @@
                     {% if current_user.is_administrator %}
                         <li class="nav-superuser">Welcome, Administrator {{ current_user.full_name }}!</li>
                     {% else %}
-                        <li class="nav-user">Welcome, Master {{ current_user.full_name }}!</li>
+                        <li class="nav-user">Welcome, {{ current_user.full_name }}!</li>
                     {% endif %}
                 {% endif %}
                 <li class="nav-item"><a href="/" class="nav-link">Home</a></li>
@@ -48,6 +48,7 @@
     {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
             {% for category, message in messages %}
+                <br>
                 <div class="alert-dismissible fade show container alert alert-{{ category }}" role="alert">
                     <strong>{{ message }}</strong>
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
