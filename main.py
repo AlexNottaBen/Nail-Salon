@@ -1,12 +1,15 @@
 #! /usr/bin/python3
 # -*- coding: utf-8 -*-
 
+from typing import List
+
 from flask import render_template, request, redirect, url_for, flash
 
 from app import app, database
 from forms.LoginForm import LoginForm
 from forms.RegisterForm import RegisterForm
 from managers.UserManager import UserManager
+from managers.OrderManager import OrderManager
 from flask_login import login_required, logout_user, current_user
 
 
@@ -47,15 +50,7 @@ def show_login_page() -> str:
 @app.route("/master/orders")
 @login_required
 def show_orders_page() -> str:
-    from models.Status import Status
-    from models.Order import Order
-    from sqlalchemy.orm import joinedload
-
-    orders = (
-        Order.query.filter_by(user_id=current_user.id)
-        .options(joinedload(Order.status))
-        .all()
-    )
+    orders: List[Order] = OrderManager.get_orders_by_current_user()
     return render_template("orders.html", orders=orders)
 
 
@@ -66,40 +61,16 @@ def show_order_card_page(id: int) -> str:
     from models.Order import Order
     from sqlalchemy.orm import joinedload
 
-    order = (
-        Order.query.filter_by(id=id).options(joinedload(Order.status)).first_or_404()
-    )
+    order: Order = OrderManager.get_order_by_id_or_404(id)
 
     if request.method == "POST":
-        # new_order = Order(
-        #     service_name=request.form["service_name"],
-        #     start_datetime=request.form["start_datetime"],
-        #     finish_datetime=request.form["finish_datetime"],
-        #     customer_full_name=request.form["customer_full_name"],
-        #     status_id=request.form["status_id"],
-        # )
-        print(request.form)
-        order.service_name=request.form["service-name"]
-        order.start_datetime=request.form["start-datetime"]
-        order.finish_datetime=request.form["finish-datetime"]
-        order.customer_full_name=request.form["customer-full-name"]
-        order.status_id=request.form["status-id"]
-        print("Updated Order Data:", order.__dict__)
-        try:
-            database.session.add(order)
-            database.session.commit()
-            flash("Update success!", category="success")
-        except Exception as _exception:
-            print(
-                "[WARNING] Exception has occured while updating order in database:",
-                _exception,
-            )
+        OrderManager.update_order_by_form(order, request.form)
 
     return render_template("ordercard.html", order=order)
 
 
 @app.route("/logout")
-def logout_page():
+def logout():
     logout_user()
     flash("You have been logged out!", category="info")
     return redirect("/")
