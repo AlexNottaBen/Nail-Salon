@@ -124,6 +124,23 @@ def delete_order(id: int):
     return redirect("/administrator/orders")
 
 
+@login_required
+@UserManager.administrator_login_required
+@app.route("/administrator/users")
+def show_users_page() -> str:
+    users: List[User] = UserManager.get_all_users()
+    return render_template("users.html", users=users)
+
+
+@login_required
+@UserManager.administrator_login_required
+@app.route("/administrator/user/<int:id>", methods=["GET", "POST"])
+def show_user_page(id: int) -> str:
+    user: User = UserManager.get_user_by_id_or_404(id=id)
+    orders: List[Order] = OrderManager.get_orders_by_user(user.id)
+    return render_template("user.html", user=user, orders=orders)
+
+
 def main() -> None:
     app.run(debug=True, port=5000)
 

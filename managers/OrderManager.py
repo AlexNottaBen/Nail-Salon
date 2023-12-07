@@ -106,7 +106,7 @@ class OrderManager:
         try:
             database.session.add(order)
             database.session.commit()
-            flash("Update success!", category="success")
+            # flash("Update success!", category="success")
         except Exception as _exception:
             print(
                 "[WARNING] Exception has occured while updating order in database:",

@@ -59,6 +59,10 @@ class UserManager:
         return User.query.all()
 
     @staticmethod
+    def get_user_by_id_or_404(id: int) -> User:
+        return User.query.filter_by(id=id).first_or_404()
+
+    @staticmethod
     def administrator_login_required(func: Callable):
         def decorated_view(*args, **kwargs):
             if current_user.is_administrator:
