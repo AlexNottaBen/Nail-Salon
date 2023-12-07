@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% block title %}Nail Salon | Order{% endblock %}
+{% block title %}Nail Salon | Update Order{% endblock %}
 {% block content %}
 <main>
     <div class="container mt-2">
@@ -8,6 +8,15 @@
             <ul class="order-card">
                 <li>№: {{ order.id }}</li>
                 <li>Service Name: <input type="text" name="service-name" id="service-name" value="{{ order.service_name }}" style="width: 400px"></li>
+                <li>Master:
+                    <select name="user-id" id="user-id">
+                        {% for user in users %}
+                            <option value="{{ user.id }}" {% if selected_user_id==user.id %}selected{% endif %}>
+                                {{ user.full_name }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </li>
                 <li>Customer Name: <input type="text" name="customer-full-name" id="customer-full-name" value="{{ order.customer_full_name }}" style="width: 400px"></li>
                 <li>Status:
                     <select name="status-id" id="status-id">
@@ -24,11 +33,11 @@
                     <input type="datetime" name="finish-datetime" value="{{ order.finish_datetime }}">
                 </li>
             </ul>
-            <a href="/master/orders" class="btn btn-primary">Go back</a>
+            <a href="/administrator/orders" class="btn btn-primary">Go back</a>
             <button type="submit" class="btn btn-warning">Update</button>
             <button type="reset" class="btn btn-danger">Reset</button>
         </form>
     </div>
 </main>
 <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
-    {% endblock %}
+{% endblock %}

@@ -1,9 +1,11 @@
 #! /usr/bin/python3
 # -*- coding: utf-8 -*-
 
+from typing import List, Callable
+
 from app import database
 from models.User import User
-from flask_login import login_user, logout_user
+from flask_login import login_user, logout_user, current_user
 from flask import flash, redirect
 from forms.RegisterForm import RegisterForm
 from forms.LoginForm import LoginForm
@@ -51,3 +53,21 @@ class UserManager:
                 "Username and password are not correct! Please try again!",
                 category="danger",
             )
+
+    @staticmethod
+    def get_all_users() -> List[User]:
+        return User.query.all()
+
+    @staticmethod
+    def get_user_by_id_or_404(id: int) -> User:
+        return User.query.filter_by(id=id).first_or_404()
+
+    @staticmethod
+    def administrator_login_required(func: Callable):
+        def decorated_view(*args, **kwargs):
+            if current_user.is_administrator:
+                return func(*args, **kwargs)
+            else:
+                return redirect("/")
+
+        return decorated_view

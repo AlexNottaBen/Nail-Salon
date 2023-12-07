@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% block title %}Nail Salon | Credits{% endblock %}
+{% block title %}Nail Salon | Orders{% endblock %}
 {% block content %}
 <main>
     <div class="container mt-2">
@@ -16,13 +16,13 @@
             </thead>
             <tbody>
                 {% for order in orders %}
-                <tr>
-                    <th scope="row">{{ order.id }}</th>
-                    <td>{{ order.service_name }}</td>
-                    <td>{{ order.customer_full_name }}</td>
-                    <td>{{ order.status.status_name }}</td>
-                    <td><a href="/master/orders/1" class="btn btn-primary">Show more</a></td>
-                </tr>
+                    <tr>
+                        <th scope="row">{{ order.id }}</th>
+                        <td>{{ order.service_name }}</td>
+                        <td>{{ order.customer_full_name }}</td>
+                        <td>{{ order.status.status_name }}</td>
+                        <td><a href="/master/order/{{ order.id }}" class="btn btn-primary">Show more</a></td>
+                    </tr>
                 {% endfor %}
             </tbody>
         </table>

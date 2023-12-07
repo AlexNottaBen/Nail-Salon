@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block title %}Nail Salon | Create Order{% endblock %}
+{% block content %}
+<main>
+    <div class="container mt-2">
+        <h1>Create Order</h1>
+        <form method="POST">
+            <ul class="order-card">
+                <li>Service Name: <input type="text" name="service-name" id="service-name" value="" style="width: 400px"></li>
+                <li>Master:
+                    <select name="user-id" id="user-id">
+                        {% for user in users %}
+                            <option value="{{ user.id }}" {% if selected_user_id==user.id %}selected{% endif %}>
+                                {{ user.full_name }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </li>
+                <li>Customer Name: <input type="text" name="customer-full-name" id="customer-full-name" value="" style="width: 400px"></li>
+                <li>Status:
+                    <select name="status-id" id="status-id">
+                        <option value="1">Scheduled</option>
+                        <option value="2">Working</option>
+                        <option value="3">Completed</option>
+                        <option value="4">Rejected</option>
+                    </select>
+                </li>
+                <li>Start:
+                    <input type="datetime" name="start-datetime" value="2000-12-30 12:59:59">
+                </li>
+                <li>Finish:
+                    <input type="datetime" name="finish-datetime" value="2000-12-30 12:59:59">
+                </li>
+            </ul>
+            <a href="/administrator/orders" class="btn btn-primary">Go back</a>
+            <button type="submit" class="btn btn-success">Create</button>
+            <button type="reset" class="btn btn-danger">Reset</button>
+        </form>
+    </div>
+</main>
+<footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+    {% endblock %}
