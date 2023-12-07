@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block title %}Nail Salon | Credits{% endblock %}
+{% block content %}
+<main>
+    <div class="container mt-2">
+        <h1>Order card</h1>
+        <form method="POST">
+            <ul class="order-card">
+                <li>№: {{ order.id }}</li>
+                <li>Service Name: <input type="text" name="service-name" id="service-name" value="{{ order.service_name }}" style="width: 400px"></li>
+                <li>Master:
+                    <select name="user-id" id="user-id">
+                        {% for user in users %}
+                            <option value="{{ user.id }}" {% if selected_user_id==user.id %}selected{% endif %}>
+                                {{ user.full_name }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </li>
+                <li>Customer Name: <input type="text" name="customer-full-name" id="customer-full-name" value="{{ order.customer_full_name }}" style="width: 400px"></li>
+                <li>Status:
+                    <select name="status-id" id="status-id">
+                        <option value="1" {% if order.status_id == 1 %}selected{% endif %}>Scheduled</option>
+                        <option value="2" {% if order.status_id == 2 %}selected{% endif %}>Working</option>
+                        <option value="3" {% if order.status_id == 3 %}selected{% endif %}>Completed</option>
+                        <option value="4" {% if order.status_id == 4 %}selected{% endif %}>Rejected</option>
+                    </select>
+                </li>
+                <li>Start:
+                    <input type="datetime" name="start-datetime" value="{{ order.start_datetime }}">
+                </li>
+                <li>Finish:
+                    <input type="datetime" name="finish-datetime" value="{{ order.finish_datetime }}">
+                </li>
+            </ul>
+            <a href="/administrator/orders" class="btn btn-primary">Go back</a>
+            <button type="submit" class="btn btn-warning">Update</button>
+            <button type="reset" class="btn btn-danger">Reset</button>
+        </form>
+    </div>
+</main>
+<footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+    {% endblock %}
