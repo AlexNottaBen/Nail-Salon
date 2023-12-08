@@ -19,11 +19,13 @@ def index() -> str:
 
 
 @app.route("/credits")
+@app.route("/credits/")
 def show_credits_page() -> str:
     return render_template("credits.html")
 
 
 @app.route("/signup", methods=["GET", "POST"])
+@app.route("/signup/", methods=["GET", "POST"])
 def show_signup_page() -> str:
     form: RegisterForm = RegisterForm()
     if form.validate_on_submit():
@@ -39,6 +41,7 @@ def show_signup_page() -> str:
 
 
 @app.route("/login", methods=["GET", "POST"])
+@app.route("/login/", methods=["GET", "POST"])
 def show_login_page() -> str:
     form: LoginForm = LoginForm()
     if form.validate_on_submit():
@@ -48,6 +51,7 @@ def show_login_page() -> str:
 
 
 @app.route("/master/orders")
+@app.route("/master/orders/")
 @login_required
 def show_orders_page() -> str:
     orders: List[Order] = OrderManager.get_orders_by_current_user()
@@ -55,6 +59,7 @@ def show_orders_page() -> str:
 
 
 @app.route("/master/order/<int:id>", methods=["GET", "POST"])
+@app.route("/master/order/<int:id>/", methods=["GET", "POST"])
 @login_required
 def show_order_card_page(id: int) -> str:
     order: Order = OrderManager.get_order_by_id_or_404(id)
@@ -66,79 +71,108 @@ def show_order_card_page(id: int) -> str:
 
 
 @app.route("/logout")
+@app.route("/logout/")
+@login_required
 def logout():
     logout_user()
     flash("You have been logged out!", category="info")
     return redirect("/")
 
 
-@login_required
-@UserManager.administrator_login_required
 @app.route("/administrator/orders", methods=["GET", "POST"])
+@app.route("/administrator/orders/", methods=["GET", "POST"])
+@login_required
 def show_administrator_orders_page() -> str:
-    users: List[User] = UserManager.get_all_users()
-    selected_user_id: int = current_user.id
-    if request.method == "POST":
-        selected_user_id = int(request.form["user-id"])
-        orders: List[Order] = OrderManager.get_orders_by_user(selected_user_id)
+    if UserManager.check_current_user_permissions():
+        users: List[User] = UserManager.get_all_users()
+        selected_user_id: int = current_user.id
+        if request.method == "POST":
+            selected_user_id = int(request.form["user-id"])
+            orders: List[Order] = OrderManager.get_orders_by_user(
+                selected_user_id
+            )
+        else:
+            orders: List[Order] = OrderManager.get_orders_by_current_user()
+
+        return render_template(
+            "orders-control.html",
+            orders=orders,
+            users=users,
+            selected_user_id=selected_user_id,
+        )
     else:
-        orders: List[Order] = OrderManager.get_orders_by_current_user()
-
-    return render_template(
-        "orders-control.html",
-        orders=orders,
-        users=users,
-        selected_user_id=selected_user_id,
-    )
+        flash("Not enough permissions to access this page!", category="danger")
+        return redirect("/")
 
 
+@app.route("/administrator/order/create", methods=["GET", "POST"])
 @app.route("/administrator/order/create/", methods=["GET", "POST"])
 @login_required
-@UserManager.administrator_login_required
 def show_create_order_page():
-    users: List[User] = UserManager.get_all_users()
-    if request.method == "POST":
-        OrderManager.create_order_by_form(request.form)
-    return render_template("create-order.html", users=users)
+    if UserManager.check_current_user_permissions():
+        users: List[User] = UserManager.get_all_users()
+        if request.method == "POST":
+            OrderManager.create_order_by_form(request.form)
+        return render_template("create-order.html", users=users)
+
+    else:
+        flash("Not enough permissions to access this page!", category="danger")
+        return redirect("/")
 
 
-@login_required
-@UserManager.administrator_login_required
 @app.route("/administrator/order/<int:id>", methods=["GET", "POST"])
+@app.route("/administrator/order/<int:id>/", methods=["GET", "POST"])
+@login_required
 def show_update_order_page(id: int) -> str:
-    users: List[User] = UserManager.get_all_users()
-    order: Order = OrderManager.get_order_by_id_or_404(id)
+    if UserManager.check_current_user_permissions():
+        users: List[User] = UserManager.get_all_users()
+        order: Order = OrderManager.get_order_by_id_or_404(id)
 
-    if request.method == "POST":
-        OrderManager.update_order_by_form(order, request.form)
-        OrderManager.update_user_in_order(order, request.form["user-id"])
+        if request.method == "POST":
+            OrderManager.update_order_by_form(order, request.form)
+            OrderManager.update_user_in_order(order, request.form["user-id"])
 
-    return render_template("update-order.html", order=order, users=users)
+        return render_template("update-order.html", order=order, users=users)
+    else:
+        flash("Not enough permissions to access this page!", category="danger")
+        return redirect("/")
 
 
-@login_required
-@UserManager.administrator_login_required
 @app.route("/administrator/order/delete/<int:id>")
+@app.route("/administrator/order/delete/<int:id>/")
+@login_required
 def delete_order(id: int):
-    OrderManager.delete_order_by_id(id=id)
-    return redirect("/administrator/orders")
+    if UserManager.check_current_user_permissions():
+        OrderManager.delete_order_by_id(id=id)
+        return redirect("/administrator/orders")
+    else:
+        flash("Not enough permissions to access this page!", category="danger")
+        return redirect("/")
 
 
-@login_required
-@UserManager.administrator_login_required
 @app.route("/administrator/users")
-def show_users_page() -> str:
-    users: List[User] = UserManager.get_all_users()
-    return render_template("users.html", users=users)
-
-
+@app.route("/administrator/users/")
 @login_required
-@UserManager.administrator_login_required
+def show_users_page() -> str:
+    if UserManager.check_current_user_permissions():
+        users: List[User] = UserManager.get_all_users()
+        return render_template("users.html", users=users)
+    else:
+        flash("Not enough permissions to access this page!", category="danger")
+        return redirect("/")
+
+
 @app.route("/administrator/user/<int:id>", methods=["GET", "POST"])
+@app.route("/administrator/user/<int:id>/", methods=["GET", "POST"])
+@login_required
 def show_user_page(id: int) -> str:
-    user: User = UserManager.get_user_by_id_or_404(id=id)
-    orders: List[Order] = OrderManager.get_orders_by_user(user.id)
-    return render_template("user.html", user=user, orders=orders)
+    if UserManager.check_current_user_permissions():
+        user: User = UserManager.get_user_by_id_or_404(id=id)
+        orders: List[Order] = OrderManager.get_orders_by_user(user.id)
+        return render_template("user.html", user=user, orders=orders)
+    else:
+        flash("Not enough permissions to access this page!", category="danger")
+        return redirect("/")
 
 
 def main() -> None:
