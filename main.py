@@ -35,7 +35,7 @@ def show_signup_page() -> Union[Response, str]:
         UserManager.register_new_user(form)
         return redirect("/")
 
-    # if there are do not have errors from the validations
+    # if there are no errors in the checks
     if form.errors != {}:
         for error_message in form.errors.values():
             flash(f"Something wrong! {error_message[0]}", category="danger")
