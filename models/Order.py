@@ -14,7 +14,9 @@ class Order(database.Model):
     user = database.relationship("User", backref="orders", lazy=True)
     start_datetime = database.Column(database.DateTime, nullable=False)
     finish_datetime = database.Column(database.DateTime, nullable=False)
-    customer_full_name = database.Column(database.String(length=128), nullable=False)
+    customer_full_name = database.Column(
+        database.String(length=128), nullable=False
+    )
     status_id = database.Column(
         database.Integer(),
         database.ForeignKey("statuses.id"),

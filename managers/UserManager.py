@@ -37,7 +37,10 @@ class UserManager:
             database.session.add(user_to_create)
             database.session.commit()
             login_user(user_to_create)  # Automatically login after register
-            flash(f"Success! Hello, {user_to_create.full_name}!", category="success")
+            flash(
+                f"Success! Hello, {user_to_create.full_name}!",
+                category="success"
+            )
         except Exception as _exception:
             print(
                 "[WARNING] Exception has occurred while adding new user to database:",
