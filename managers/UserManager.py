@@ -9,6 +9,7 @@ from flask_login import login_user, logout_user, current_user
 from flask import flash, redirect
 from forms.RegisterForm import RegisterForm
 from forms.LoginForm import LoginForm
+from werkzeug.wrappers.response import Response
 
 
 class UserManager:
@@ -63,11 +64,12 @@ class UserManager:
         return User.query.filter_by(id=id).first_or_404()
 
     @staticmethod
-    def administrator_login_required(func: Callable):
-        def decorated_view(*args, **kwargs):
-            if current_user.is_administrator:
-                return func(*args, **kwargs)
-            else:
-                return redirect("/")
-
-        return decorated_view
+    def check_current_user_permissions() -> bool:
+        """
+        Return True if current user is administrator unless False
+        """
+        try:
+            return current_user.is_administrator
+        except Exception as _exception:
+            print("[WARNING] Exception has occured while checking user permmsion: ", _exception)
+            return False
