@@ -74,7 +74,7 @@ class OrderManager:
             Order: The Order object.
 
         Raises:
-            404NotFound: If the order with the given ID is not found.
+            NotFound: If the order with the given ID is not found.
         """
         try:
             order: Order = (

@@ -1,10 +1,11 @@
 #! /usr/bin/python3
 # -*- coding: utf-8 -*-
 
-from typing import List, Union
+from typing import List, Union, Any
 
 from flask import render_template, request, redirect, flash
 from werkzeug import Response
+from werkzeug.exceptions import NotFound
 
 from app import app
 from forms.LoginForm import LoginForm
@@ -91,9 +92,7 @@ def show_administrator_orders_page() -> Union[Response, str]:
         selected_user_id: int = current_user.id
         if request.method == "POST":
             selected_user_id = int(request.form["user-id"])
-            orders: List[Order] = OrderManager.get_orders_by_user(
-                selected_user_id
-            )
+            orders: List[Order] = OrderManager.get_orders_by_user(selected_user_id)
         else:
             orders: List[Order] = OrderManager.get_orders_by_current_user()
 
@@ -177,6 +176,11 @@ def show_user_page(user_id: int) -> Union[str, Response]:
     else:
         flash("Not enough permissions to access this page!", category="danger")
         return redirect("/")
+
+
+@app.errorhandler(404)
+def page_not_found(error: NotFound) -> str:
+    return render_template("404.html")
 
 
 def main() -> None:

@@ -58,7 +58,7 @@ class UserManager:
         Returns:
             Response: A werkzeug Response object.
         """
-        attempted_user = User.query.filter_by(
+        attempted_user: User = User.query.filter_by(
             email_address=form.email_address.data
         ).first()
         if attempted_user and attempted_user.check_password_correction(
@@ -96,7 +96,7 @@ class UserManager:
             User: The User object.
 
         Raises:
-            404NotFound: If the user with the given ID is not found.
+            NotFound: If the user with the given ID is not found.
         """
         return User.query.filter_by(id=user_id).first_or_404()
 
