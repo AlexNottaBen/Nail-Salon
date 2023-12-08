@@ -3,8 +3,7 @@
 
 from flask import request
 
-from targets.app import app
-
+from app import app
 
 with app.test_request_context("/", method="GET"):
     assert request.path == "/"
