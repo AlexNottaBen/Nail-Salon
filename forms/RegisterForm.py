@@ -1,13 +1,12 @@
 #! /usr/bin/python3
 # -*- coding: utf-8 -*-
 
-from flask import flash
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField
 from wtforms.validators import Length, Email, EqualTo
 from wtforms import SubmitField, IntegerField, EmailField
-from wtforms.validators import DataRequired, ValidationError
-from models.User import User
+from wtforms.validators import DataRequired
+
 
 class RegisterForm(FlaskForm):
 

@@ -3,6 +3,7 @@
 
 from app import database
 
+
 class Order(database.Model):
     __tablename__ = "orders"
     id = database.Column(database.Integer(), primary_key=True)
@@ -18,6 +19,6 @@ class Order(database.Model):
         database.Integer(),
         database.ForeignKey("statuses.id"),
         nullable=False,
-        default=1
+        default=1,
     )
     status = database.relationship("Status", backref="orders", lazy=True)

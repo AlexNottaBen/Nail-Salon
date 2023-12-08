@@ -4,6 +4,7 @@
 from app import database, bcrypt
 from flask_login import UserMixin
 
+
 class User(database.Model, UserMixin):
     __tablename__ = "users"
     id = database.Column(database.Integer(), primary_key=True)
@@ -22,7 +23,7 @@ class User(database.Model, UserMixin):
         return self.password
 
     @password.setter
-    def password(self, plain_text_password: str) -> str:
+    def password(self, plain_text_password: str) -> None:
         self.password_hash = bcrypt.generate_password_hash(plain_text_password).decode(
             "utf-8"
         )
