@@ -3,6 +3,14 @@
 Web application for nail salon management.
 The system is available in two options for viewing - authorized users who see all the entities of the system (Administrator), and authorized users who see only their orders (Manicur master).
 
+## [Run Live Demo](https://alexnottaben.pythonanywhere.com/)
+
+# Screenshots
+
+## Main page
+
+![mainpage](./screenshots/mainpage.png)
+
 ## How to run
 
 ### First clone this repository and change directory to it!
