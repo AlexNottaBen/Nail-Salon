@@ -32,6 +32,16 @@ A order card:
 
 ![orderspreview](./screenshots/orderspreview.png)
 
+## Orders (On behalf of the manicure master/user)
+
+A page with orders:
+
+![user_orderpreview](./screenshots/user_orderpreview.png)
+
+A order card:
+
+![user_orderspreview](./screenshots/user_orderspreview.png)
+
 ## How to run
 
 ### First clone this repository and change directory to it!
