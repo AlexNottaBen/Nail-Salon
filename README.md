@@ -26,21 +26,21 @@ A user card:
 
 A page with orders:
 
-![orderpreview](./screenshots/orderpreview.png)
+![orderpreview](./screenshots/orderspreview.png)
 
 A order card:
 
-![orderspreview](./screenshots/orderspreview.png)
+![orderspreview](./screenshots/orderpreview.png)
 
 ## Orders (On behalf of the manicure master/user)
 
 A page with orders:
 
-![user_orderpreview](./screenshots/user_orderpreview.png)
+![user_orderpreview](./screenshots/user_orderspreview.png)
 
 A order card:
 
-![user_orderspreview](./screenshots/user_orderspreview.png)
+![user_orderspreview](./screenshots/user_orderpreview.png)
 
 ## How to run
 
