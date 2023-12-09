@@ -1,4 +1,4 @@
-# Asden-Nail-Salon
+# Asden Nail Salon
 
 Web application for nail salon management.
 The system is available in two options for viewing - authorized users who see all the entities of the system (Administrator), and authorized users who see only their orders (Manicure master).
