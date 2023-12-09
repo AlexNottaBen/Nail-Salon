@@ -1,25 +1,70 @@
 # Asden-Nail-Salon
 
-<h2>Credits</h2>
-<h3>Developer</h3>
-<p>Alexander Serhiienko (alias AlexNottaBen)</p>
-<h3>Media content:</h3>
-<p>This favicon was generated using the following graphics from Twitter Twemoji:</p>
-<ul>
-    <li>Graphics Author: Copyright 2020 Twitter, Inc and other
-        <a href="https://github.com/twitter/twemoji">
-            contributors
-        </a>;
-    </li>
-    <li>Graphics Source:
-        <a href="https://github.com/twitter/twemoji/blob/master/assets/svg/1f485.svg">
-            GitHub Page
-        </a>;
-    </li>
-    <li>Graphics License:
-        <a href="https://creativecommons.org/licenses/by/4.0/">
-            CC-BY 4.0
-        </a>.
-    </li>
-</ul>
-<p> Photo: <a href="https://foto.wuestenigel.com/beautiful-female-hand-with-winter-manicure/" target="_blank">Beautiful female hand with winter manicure</a> by <a href="https://linktr.ee/wuestenigel" target="_blank">Marco Verch</a> under <a href="https://creativecommons.org/licenses/by/2.0/" target="_blank">Creative Commons 2.0</a></p>
+## How to run
+
+### First clone this repository and change directory to it!
+
+```bash
+git clone https://github.com/AlexNottaBen/Asden-Nail-Salon.git
+cd Asden-Nail-Salon
+```
+
+### Make virtual enviroment and install dependences!
+
+```bash
+python -m venv venv
+```
+
+Next, activate it!
+
+For Unix-like (GNU/Linux, macOS, *BSD, Solaris etc):
+
+```bash
+source venv/bin/activate
+```
+
+For Microsoft Windows:
+
+```powershell
+venv\Scripts\activate
+```
+
+Install dependences(requirements):
+
+
+```bash
+pip install -r requirements.txt
+```
+
+### Set up database and run application!
+
+Create a file ".env" and fill it in like ".env.example", indicating your URI to the database and the secret key.
+
+Next, migrate database!
+
+```bash
+python3 manage.py
+```
+
+Finally, run application!
+
+```bash
+python3 main.py
+```
+
+### NOTE: Use 'python' instead of 'python3' if you use Microsoft Windows.
+
+## Credits
+
+### Developer
+Alexander Serhiienko (alias AlexNottaBen)
+
+### Media content:
+
+#### Favicon
+This favicon was generated using the following graphics from Twitter Twemoji:
+- **Graphics Author:** Copyright 2020 Twitter, Inc and other [contributors](https://github.com/twitter/twemoji).
+- **Graphics Source:** [GitHub Page](https://github.com/twitter/twemoji/blob/master/assets/svg/1f485.svg).
+- **Graphics License:** [CC-BY 4.0](https://creativecommons.org/licenses/by/4.0/).
+
+Photo [Beautiful female hand with winter manicure](https://foto.wuestenigel.com/beautiful-female-hand-with-winter-manicure/) by [Marco Verch](https://linktr.ee/wuestenigel) under [CC-BY 2.0](https://creativecommons.org/licenses/by/2.0/).
