@@ -11,6 +11,27 @@ The system is available in two options for viewing - authorized users who see al
 
 ![mainpage](./screenshots/mainpage.png)
 
+## Users
+
+A page with users:
+
+![userspreview](./screenshots/userspreview.png)
+
+A user card:
+
+![userpreview](./screenshots/userpreview.png)
+
+
+## Orders
+
+A page with orders:
+
+![orderpreview](./screenshots/orderpreview.png)
+
+A order card:
+
+![orderspreview](./screenshots/orderspreview.png)
+
 ## How to run
 
 ### First clone this repository and change directory to it!
