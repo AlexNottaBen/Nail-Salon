@@ -7,6 +7,8 @@ from werkzeug import Response
 
 from app import database
 from models.User import User
+from models.Status import Status
+from models.Order import Order
 from flask_login import login_user, current_user
 from flask import flash, redirect
 from forms.RegisterForm import RegisterForm

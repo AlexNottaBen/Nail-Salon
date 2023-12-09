@@ -9,6 +9,8 @@ from flask_login import current_user
 from sqlalchemy.orm import joinedload
 
 from app import database
+from models.User import User
+from models.Status import Status
 from models.Order import Order
 
 
