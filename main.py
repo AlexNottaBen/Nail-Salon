@@ -62,8 +62,8 @@ def show_orders_page() -> str:
     return render_template("orders.html", orders=orders)
 
 
-@app.route("/master/order/<int:id>", methods=["GET", "POST"])
-@app.route("/master/order/<int:id>/", methods=["GET", "POST"])
+@app.route("/master/order/<int:order_id>", methods=["GET", "POST"])
+@app.route("/master/order/<int:order_id>/", methods=["GET", "POST"])
 @login_required
 def show_order_card_page(order_id: int) -> str:
     order: Order = OrderManager.get_order_by_id_or_404(order_id)
@@ -122,8 +122,8 @@ def show_create_order_page() -> Union[str, Response]:
         return redirect("/")
 
 
-@app.route("/administrator/order/<int:id>", methods=["GET", "POST"])
-@app.route("/administrator/order/<int:id>/", methods=["GET", "POST"])
+@app.route("/administrator/order/<int:order_id>", methods=["GET", "POST"])
+@app.route("/administrator/order/<int:order_id>/", methods=["GET", "POST"])
 @login_required
 def show_update_order_page(order_id: int) -> Union[str, Response]:
     if UserManager.check_current_user_permissions():
@@ -141,8 +141,8 @@ def show_update_order_page(order_id: int) -> Union[str, Response]:
         return redirect("/")
 
 
-@app.route("/administrator/order/delete/<int:id>")
-@app.route("/administrator/order/delete/<int:id>/")
+@app.route("/administrator/order/delete/<int:order_id>")
+@app.route("/administrator/order/delete/<int:order_id>/")
 @login_required
 def delete_order(order_id: int) -> Response:
     if UserManager.check_current_user_permissions():
@@ -165,8 +165,8 @@ def show_users_page() -> Union[str, Response]:
         return redirect("/")
 
 
-@app.route("/administrator/user/<int:id>", methods=["GET", "POST"])
-@app.route("/administrator/user/<int:id>/", methods=["GET", "POST"])
+@app.route("/administrator/user/<int:user_id>", methods=["GET", "POST"])
+@app.route("/administrator/user/<int:user_id>/", methods=["GET", "POST"])
 @login_required
 def show_user_page(user_id: int) -> Union[str, Response]:
     if UserManager.check_current_user_permissions():
