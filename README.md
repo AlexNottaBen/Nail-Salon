@@ -46,7 +46,7 @@ Create a file ".env" and fill it in like ".env.example", indicating your URI to 
 Next, migrate database!
 
 ```bash
-python3 manage.py
+python3 migrate.py
 ```
 
 Finally, run application!
