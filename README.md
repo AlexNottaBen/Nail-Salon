@@ -1,4 +1,4 @@
-# Asden Nail Salon
+# Nail Salon
 
 Web application for nail salon management.
 The system is available in two options for viewing - authorized users who see all the entities of the system (Administrator), and authorized users who see only their orders (Manicure master).
@@ -94,7 +94,7 @@ Finally, run application!
 python3 main.py
 ```
 
-### NOTE: Use 'python' instead of 'python3' if you use Microsoft Windows.
+### NOTE: Use 'py' instead of 'python3' if you use Microsoft Windows.
 
 ## Credits
 
